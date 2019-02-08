@@ -27,14 +27,23 @@ public class QueenBoard{
       return false;
     }
     board[r][c] = 0; //this may have to change
+    return true;
   }
 
   public String toString(){
+    String slow = "";
     for (int r = 0; r < board.length;r++) {
       for (int c = 0; c < board[r].length;c++){
-        
+        if (board[r][c] == -1) {
+          slow += "Q ";
+        }
+        else {
+          slow += "_ ";
+        }
       }
+      slow += "\n";
     }
+    return slow;
   }
 
   public boolean solve(){
