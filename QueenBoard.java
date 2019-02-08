@@ -38,7 +38,8 @@ public class QueenBoard{
           slow += "Q ";
         }
         else {
-          slow += "_ ";
+          slow += "" + board[r][c] + " ";
+          //slow += "_ ";
         }
       }
       slow += "\n";
@@ -47,14 +48,38 @@ public class QueenBoard{
   }
 
   public boolean solve(){
+    for (int x = 0; x < board.length; x++) {
 
+    }
+
+    addQueen(1,3);
+    addHorizontally(1,3);
+    addVertically(1,3);
+    return false;
   }
 
   public int countSolutions(){
+    return 0;
+  }
+
+  private void addHorizontally(int r, int c) {
+    for (int x = 0; x < board.length; x++) {
+      if (!(x == c)) {
+        board[r][x] += 1;
+      }
+    }
+  }
+
+  private void addVertically(int r, int c) {
+    for (int y = 0; y < board.length; y++) {
+      if (!(y == r)) {
+        board[y][c] += 1;
+      }
+    }
+  }
+
+  private void addDiagonally(int r, int c ) {
 
   }
 
-  private void addHorizontally(int[][] border) {
-
-  }
 }
