@@ -53,15 +53,16 @@ public class QueenBoard{
     }
 
     addQueen(1,3);
-    addHorizontally(1,3);
-    addVertically(1,3);
+    //addHorizontally(1,3);
+    //addVertically(1,3);
+    addDiagonally(1,3);
     return false;
   }
 
   public int countSolutions(){
     return 0;
   }
-
+  //these won't overlap the placed queen, need to change to check for other queens
   private void addHorizontally(int r, int c) {
     for (int x = 0; x < board.length; x++) {
       if (!(x == c)) {
@@ -77,9 +78,24 @@ public class QueenBoard{
       }
     }
   }
-
+  //numbers are the same in relation to r,c i.e. r-1, c+1 , use i to change
   private void addDiagonally(int r, int c ) {
+    for (int i = 0; i < board.length-r && i <board.length-c; i++) {
+      board[r+i][c+i] += 1;
+      if (r-i > -1 && c-i > -1) {
+        board[r-i][c-i] += 1;
+      }
+      if (r-i > -1) {
+        board[r-i][c+i] += 1;
+      }
+      if (c-i > -1) {
+        board[r+i][c-i] += 1;
+      }
+
+
+    }
 
   }
+
 
 }
