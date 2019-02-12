@@ -103,8 +103,10 @@ public class QueenBoard{
   }
   //numbers are the same in relation to r,c i.e. r-1, c+1 , use i to change
   private void addDiagonally(int r, int c, int factor) {
-    for (int i = 1; i < board.length-r && i <board.length-c; i++) {
-      board[r+i][c+i] += factor;
+    for (int i = 1; i < board.length-1; i++) {
+      if (r+i < board.length && c+i < board.length) {
+        board[r+i][c+i] += factor;
+      }
       if (r-i > -1 && c-i > -1) {
         board[r-i][c-i] += factor;
       }
@@ -117,4 +119,9 @@ public class QueenBoard{
     }
   }
 
+  public void test(){
+    addQueen(1,3);
+    addQueen(2,5);
+    removeQueen(2,5);
+  }
 }
