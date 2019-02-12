@@ -52,6 +52,9 @@ public class QueenBoard{
   }
 
   public boolean solve(){
+    if (checkBoard()) {
+      throw new IllegalStateException("non-zero detected");
+    }
     return solveR(0);
   }
 
@@ -71,7 +74,26 @@ public class QueenBoard{
   }
 
   public int countSolutions(){
-    return 0;
+    if (checkBoard()) {
+      throw new IllegalStateException("non-zero detected");
+    }
+    int total = 0;
+    return countSolutionsR(0,0);
+  }
+
+  public int countSolutionsR(int col, int total) {
+    if (col >= board.length) {
+      return 1;
+    }
+    for (int r = 0; r < board.length; r++) {
+      if (addQueen(r,col)) {
+        return countSolutionsR(col + 1, total);
+      }
+      else {
+        removeQueen(r,col);
+      }
+    }
+    return total;
   }
   //these won't overlap the placed queen, need to change to check for other queens
   /*
@@ -122,5 +144,15 @@ public class QueenBoard{
   public void test(){
     addQueen(0,0);
     //addQueen(2,5);
+  }
+  private boolean checkBoard(){
+    for (int r = 0; r < board.length; r++) {
+      for (int c = 0; c < board.length; c++) {
+        if (board[r][c] != 0) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
