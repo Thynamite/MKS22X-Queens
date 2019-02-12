@@ -77,21 +77,19 @@ public class QueenBoard{
     if (checkBoard()) {
       throw new IllegalStateException("non-zero detected");
     }
-    int total = 0;
-    return countSolutionsR(0,0);
+    return countSolutionsR(0);
   }
 
-  public int countSolutionsR(int col, int total) {
+  public int countSolutionsR(int col) {
     if (col >= board.length) {
       return 1;
     }
+    int total = 0;
     for (int r = 0; r < board.length; r++) {
       if (addQueen(r,col)) {
-        return countSolutionsR(col + 1, total);
+        total += countSolutionsR(col + 1);
       }
-      else {
-        removeQueen(r,col);
-      }
+      removeQueen(r,col);
     }
     return total;
   }
@@ -141,10 +139,6 @@ public class QueenBoard{
     }
   }
 
-  public void test(){
-    addQueen(0,0);
-    //addQueen(2,5);
-  }
   private boolean checkBoard(){
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board.length; c++) {
